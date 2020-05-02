@@ -104,7 +104,7 @@ def demo(sess, net, image_name):
 def parse_args():
     """Parse input arguments."""
     parser = argparse.ArgumentParser(description='Tensorflow Faster R-CNN demo')
-    parser.add_argument('--net', dest='demo_net', help='Network to use [vgg16 res101]',
+    parser.add_argument('--network', dest='demo_net', help='Network to use [vgg16 res101]',
                         choices=NETS.keys(), default='res101')
     parser.add_argument('--dataset', dest='dataset', help='Trained dataset [pascal_voc pascal_voc_0712]',
                         choices=DATASETS.keys(), default='pascal_voc_0712')
@@ -118,8 +118,9 @@ if __name__ == '__main__':
 
     # model path
     demonet = args.demo_net
-    dataset = args.dataset
-    tfmodel = os.path.join('output', demonet, DATASETS[dataset][0], 'default', NETS[demonet][0])
+    dataset = 'pascal_voc' # dataset not defined in tf.flags so get removed and define dataset here
+    # dataset = args.dataset
+    tfmodel = os.path.join('default', demonet, DATASETS[dataset][0], 'default', NETS[demonet][0])
 
     if not os.path.isfile(tfmodel + '.meta'):
         print(tfmodel)
